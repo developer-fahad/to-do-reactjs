@@ -23,7 +23,9 @@ const Cards = () => {
   const fetchUrls = async () => {
     setLoading(true);
     try {
-      const response = await axios.get("http://localhost:5000/get-urls");
+      const response = await axios.get(
+        "https://to-do-list-psi-lovat.vercel.app/get-urls"
+      );
 
       // Check if the response is successful
       if (response.data.success) {
@@ -44,7 +46,7 @@ const Cards = () => {
     fetchUrls();
   }, []);
 
-  console.log(urls);
+  // console.log(urls);
 
   // ImgBB API key (replace with your actual API key)
   const IMGBB_API_KEY = import.meta.env.VITE_IMG_HOSTING_API_KEY;
@@ -84,7 +86,7 @@ const Cards = () => {
             );
 
             if (response.data.success) {
-              console.log(response.data.data); // Log the response for debugging
+              // console.log(response.data.data); // Log the response for debugging
               return `${response.data.data.url}${generateUniqueHexCode()}`; // Just return the URL directly
             } else {
               console.error("Upload failed:", response.data);
@@ -96,11 +98,14 @@ const Cards = () => {
           }
         })
       );
-      console.log(uploadedUrls);
+      // console.log(uploadedUrls);
 
-      const res = await axios.put("http://localhost:5000/img-urls", {
-        urls: uploadedUrls,
-      });
+      const res = await axios.put(
+        "https://to-do-list-psi-lovat.vercel.app/img-urls",
+        {
+          urls: uploadedUrls,
+        }
+      );
       console.log(res.data);
       if (res.data.success) {
         document.getElementById("file-input").value = "";
